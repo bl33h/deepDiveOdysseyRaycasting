@@ -8,6 +8,8 @@ Last modification: 17/11/2023
 *Some parts were made using the AIs Bard and ChatGPT
 ------------------------------------------------------------------------------*/
 #pragma once
+#include "colors.h"
+#include "resourceManager.h"
 #include <iostream>
 #include <fstream>
 #include <SDL_render.h>
@@ -16,8 +18,6 @@ Last modification: 17/11/2023
 #include <cmath>
 #include <SDL2/SDL.h>
 #include <unordered_map>
-#include "colors.h"
-#include "resourceManager.h"
 #include <array>
 
 struct Point {
