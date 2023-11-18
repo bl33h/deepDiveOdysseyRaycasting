@@ -1,4 +1,4 @@
-# raycasting
+# deepDiveOdysseyRaycasting
 
 The code represents a program for
 
