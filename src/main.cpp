@@ -19,8 +19,3 @@ Last modification: 09/11/2023
 #include <SDL_events.h>
 #include <SDL_render.h>
 #include <SDL_video.h>
-
-// SDL window initial setup
-bool winner = false;
-SDL_Window* window;
-SDL_Renderer* renderer;
