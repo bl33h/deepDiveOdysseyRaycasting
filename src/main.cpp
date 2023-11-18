@@ -4,7 +4,7 @@ Copyright (C), 2022-2023, Sara Echeverria (bl33h)
 FileName: main.cpp
 @version: I
 Creation: 06/11/2023
-Last modification: 17/11/2023 
+Last modification: 17/11/2023
 *Some parts were made using the AIs Bard and ChatGPT
 ------------------------------------------------------------------------------*/
 #include "resourceManager.h"
@@ -246,7 +246,7 @@ int main() {
             int nextY = r.player.y + speed * sin(r.player.a);
             if (r.checkWinner()) {
                 Mix_PlayChannel(-1, winner, 0);
-                playerWon = true;
+                winnerConfig = true;
             }
             if (!r.checkCollision(nextX, nextY)) {
                 Mix_PlayChannel(-1, marineWalking, 0);
@@ -260,7 +260,7 @@ int main() {
             int nextY = r.player.y - speed * sin(r.player.a);
             if (r.checkWinner()) {
                 Mix_PlayChannel(-1, winner, 0);
-                playerWon = true;
+                winnerConfig = true;
             }
             if (!r.checkCollision(nextX, nextY)) {
                 Mix_PlayChannel(-1, turn, 0);
@@ -289,7 +289,7 @@ int main() {
     playerRect.y = SCREEN_HEIGHT - size;
     playerRect.w = size;
     playerRect.h = size;
-    if (playerWon) {
+    if (winnerConfig) {
         renderWinnerMessage();
 
     } else {

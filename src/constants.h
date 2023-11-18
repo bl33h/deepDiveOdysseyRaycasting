@@ -19,7 +19,8 @@ Last modification: 17/11/2023
 
 SDL_Window* window;
 SDL_Renderer* renderer;
-bool playerWon = false;
+bool winnerConfig = false;
 
 Mix_Chunk* marineWalking = nullptr;
 Mix_Chunk* winner = nullptr;
+Mix_Chunk* turn = nullptr;
