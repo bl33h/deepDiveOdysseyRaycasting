@@ -4,7 +4,7 @@ The code represents a program for
 
 <p align="center">
   <br>
-  <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExbDZ4bWZyNjZucjlsYnN5amRndGtuejJvaDN5Mmpsbm5sMjdjNDJheSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/k6pTwJ5WerJqYjKLWd/giphy.gif" alt="pic" width="500">
+  <img src="" alt="pic" width="500">
   <br>
 </p>
 
