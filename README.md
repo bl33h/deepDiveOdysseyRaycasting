@@ -4,10 +4,7 @@ The code represents a program for
 
 <p align="center">
   <br>
-  <video width="500" height="280" controls>
-    <source src="src/vid/ddo.mp4" type="video/mp4">
-    Tu navegador no soporta el tag de video.
-  </video>
+  <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpsd2RzZWZjanN6eGQ3dG1randuZWk0dW5rb3oyYmRydXF6djA2dSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/cKLWT870ZJ9XwipnWw/giphy.gif" alt="pic" width="500">
   <br>
 </p>
 
@@ -19,31 +16,11 @@ The code represents a program for
 
 ## Files
 
-- **configure.sh**: A shell script to set up the project dependencies and environment.
-- **build.sh**: A shell script to build the project using CMake.
-- **run.sh**: A shell script to execute the compiled graphics application.
-- **clean.sh**: A shell script to clean up build artifacts and generated files.
-- **src**: A directory containing the source code files for the graphics application.
-  - **barycentric.cpp**: Implementation of functions related to barycentric coordinates calculation.
-  - **border.cpp**: Implementation of functions for drawing lines.
-  - **border.h**: Header file declaring functions for drawing lines.
-  - **colors.h**: Header file defining color structures and operations.
-  - **fragment.h**: Header file defining fragment and shader-related structures.
-  - **framebuffer.cpp**: Implementation of functions for handling the frame buffer.
-  - **framebuffer.h**: Header file declaring functions and data structures for managing the frame buffer.
-  - **print.h**: Header file containing functions for printing various data types.
-  - **shaders.h**: Header file defining fragment and vertex shader functions.
-  - **trianglefill.cpp**: Implementation of functions for loading 3D models.
-  - **trianglefill.h**: Header file declaring functions and data structures for loading 3D models.
-  - **triangles.h**: Header file declaring functions and structures related to triangle rendering.
-
 ## Features
 
 The main features of the graphics application include:
 
-- Loading and rendering 3D models.
-- Flat shading of the 3D models.
-- Use of barycentric coordinates for triangle rendering.
+- 
 
 ## How To Use
 
