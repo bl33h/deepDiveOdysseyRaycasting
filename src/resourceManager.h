@@ -15,24 +15,32 @@ Last modification: 17/11/2023
 #include <string>
 #include "colors.h"
 
+// resourceManager class for handling image resources
 class ResourceManager {
+
 private:
     static std::map<std::string, SDL_Surface*> imageSurfaces;
+
 public:
+    // initializes SDL_image library
     static void init() {
         int imgFlags = IMG_INIT_PNG;
     }
+
+    // loads an image into the resource manager with a specified key
     static void loadImage(const std::string& key, const char* path) {
         SDL_Surface* newSurface = IMG_Load(path);
         imageSurfaces[key] = newSurface;
     }
+
+    // retrieves the pixel color at a specified position in an image
     static Color getPixelColor(const std::string& key, int x, int y) {
         auto it = imageSurfaces.find(key);
         SDL_Surface* targetSurface = it->second;
         int bpp = targetSurface->format->BytesPerPixel;
         Uint8 *p = (Uint8 *)targetSurface->pixels + y * targetSurface->pitch + x * bpp;
-
         Uint32 pixelColor;
+
         switch (bpp) {
             case 1:
                 pixelColor = *p;
@@ -53,12 +61,13 @@ public:
             default:
                 throw std::runtime_error("Unknown format!");
         }
-        
+
         SDL_Color color;
         SDL_GetRGB(pixelColor, targetSurface->format, &color.r, &color.g, &color.b);
         return Color{color.r, color.g, color.b};
     }
 
+    // renders an image on the specified SDL renderer at a given position
     static void render(SDL_Renderer* renderer, const std::string& key, int x, int y, int size = -1) {
         auto it = imageSurfaces.find(key);
 
@@ -74,6 +83,7 @@ public:
         SDL_DestroyTexture(texture);
     }
 
+    // cleans up resources by freeing loaded image surfaces
     static void cleanup() {
         for (auto& pair : imageSurfaces) {
             if (pair.second) {
@@ -85,4 +95,5 @@ public:
     }
 };
 
+// initialization of the imageSurfaces map
 std::map<std::string, SDL_Surface*> ResourceManager::imageSurfaces;
