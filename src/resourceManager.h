@@ -86,4 +86,3 @@ public:
 };
 
 std::map<std::string, SDL_Surface*> ResourceManager::imageSurfaces;
-
