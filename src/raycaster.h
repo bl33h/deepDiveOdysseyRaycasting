@@ -39,6 +39,7 @@ struct Point {
   int y; // y-coordinate
 };
 
+// structure representing a player in the game
 struct Player {
   int x;
   int y;
@@ -46,12 +47,14 @@ struct Player {
   float fov;
 }; 
 
+// structure representing the impact information of a ray *avoids coll
 struct Impact {
   float d;
   std::string mapHit;
   int tx;
 };
 
+// class for raycasting and rendering the game
 class Raycaster {
 public:
   Raycaster(SDL_Renderer* renderer)
@@ -67,23 +70,24 @@ public:
     tsize = 128;
   }
 
-  bool load_map(const std::string& filename) {
-    std::ifstream file(filename);
-
-    std::string line;
-    while (getline(file, line)) {
-      map.push_back(line);
-    }
-
-    file.close();
-    return true;
-  }
-
+  // draws a point on the renderer with the given color
   void point(int x, int y, Color c) {
     SDL_SetRenderDrawColor(renderer, c.r, c.g, c.b, c.a);
     SDL_RenderDrawPoint(renderer, x, y);
   }
 
+  // loads the game map from a file
+  bool loadMap(const std::string& filename) {
+    std::ifstream file(filename);
+    std::string line;
+    while (getline(file, line)) {
+      map.push_back(line);
+    }
+    file.close();
+    return true;
+  }
+
+  // draws a rectangle on the renderer with a specified texture map
   void rect(int x, int y, const std::string& mapHit, int width, int height) {
     float minimapScale = 10.0f;
     int scaledWidth = static_cast<int>(width);
@@ -103,7 +107,8 @@ public:
     }
 }
 
-  Impact cast_ray(float a) {
+  // casts a ray and returns impact information
+  Impact castR(float a) {
     float d = 0;
     std::string mapHit;
     int tx;
@@ -141,6 +146,7 @@ public:
     return Impact{d, mapHit, tx};
   }
 
+  // draws a stake on the renderer
   void drawStake(int x, float h, Impact i) {
     float start = SCREEN_HEIGHT/2.0f - h/2.0f;
     float end = start + h;
@@ -154,6 +160,7 @@ public:
     }
   }
 
+  // checks if the player is on the winning position (found the treasure)
   bool checkWinner() {
     std::array<Point, 4> Offset = {Point{-1,0},Point{0,1}, Point{1,0}, Point{0,-1} };
     for (int i = 0; i < 4; i++ ){
@@ -170,17 +177,19 @@ public:
       return false;
     }
 
+  // checks for coll at a given position
   bool checkCollision(int x, int y) {
       int i = x / BLOCK;
       int j = y / BLOCK;
       return map[j][i] != ' ';
   }
 
+  // renders the game scene
   void render() {
 
     for (int i = 0; i < SCREEN_WIDTH; i++) {
       double a = player.a + player.fov / 2.0 - player.fov * i / SCREEN_WIDTH;
-      Impact impact = cast_ray(a);
+      Impact impact = castR(a);
       float d = impact.d;
       Color c = Color(255, 0, 0);
       int x = i;
@@ -215,16 +224,16 @@ public:
 
     for (int i = 0; i < SCREEN_WIDTH; i++) {
       float a = player.a + player.fov / 2 - player.fov * i / minimapX;
-      cast_ray(a);
+      castR(a);
     }
     }
 
   }
 
   Player player;
-private:
-  int scale;
+  private:
+  int scale; 
   SDL_Renderer* renderer;
-  std::vector<std::string> map;
+  std::vector<std::string> map; //game map
   int tsize;
 };

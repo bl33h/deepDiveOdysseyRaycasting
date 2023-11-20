@@ -193,7 +193,7 @@ int main() {
     }
 
     Raycaster r = { renderer };
-    if (!r.load_map(levels[selectedLevel].mapFile)) {
+    if (!r.loadMap(levels[selectedLevel].mapFile)) {
         return 1;
     }
 
