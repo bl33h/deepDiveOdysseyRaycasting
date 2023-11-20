@@ -20,25 +20,24 @@ Last modification: 17/11/2023
 #include "resourceManager.h"
 #include <array>
 
-struct Point {
-  int x;
-  int y;
-};
-
-const Color B = {245, 236, 255};
-const Color W = {255, 255, 255};
-
-const int WIDTH = 16;
-const int HEIGHT = 11;
-const int BLOCK = 50;
+const Color B = {245, 236, 255}; // background color
+const Color W = {255, 255, 255}; // clear color
+const int WIDTH = 16; // width of the game map
+const int HEIGHT = 11; // height of the game map
+const int BLOCK = 50; // size of a map block
 const int SCREEN_WIDTH = WIDTH * BLOCK;
 const int SCREEN_HEIGHT = HEIGHT * BLOCK;
 int minimapWidth = SCREEN_WIDTH / 4; 
 int minimapHeight = SCREEN_HEIGHT / 4;
 int minimapX = SCREEN_WIDTH - minimapWidth;
 int minimapY = 0;
-
 float minimapScale = 0.25f;
+
+// structure representing a 2D point
+struct Point {
+  int x; // x-coordinate
+  int y; // y-coordinate
+};
 
 struct Player {
   int x;
@@ -142,7 +141,7 @@ public:
     return Impact{d, mapHit, tx};
   }
 
-  void draw_stake(int x, float h, Impact i) {
+  void drawStake(int x, float h, Impact i) {
     float start = SCREEN_HEIGHT/2.0f - h/2.0f;
     float end = start + h;
 
@@ -186,7 +185,7 @@ public:
       Color c = Color(255, 0, 0);
       int x = i;
       float h = static_cast<float>(SCREEN_HEIGHT)/static_cast<float>(d) * static_cast<float>(scale);
-      draw_stake(x, h, impact);
+      drawStake(x, h, impact);
     }
 
     SDL_SetRenderDrawColor(renderer, 79, 66, 95, 255);  
