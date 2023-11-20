@@ -17,10 +17,10 @@ Last modification: 17/11/2023
 #include <SDL2/SDL.h>
 #include <SDL_video.h>
 
-SDL_Window* window;
-SDL_Renderer* renderer;
-bool winnerConfig = false;
+SDL_Window* window; // pointer to the SDL window
+SDL_Renderer* renderer; // pointer to the SDL renderer
+bool winnerConfig = false; // flag indicating if the game has a winner
 
-Mix_Chunk* marineWalking = nullptr;
-Mix_Chunk* winner = nullptr;
-Mix_Chunk* turn = nullptr;
+Mix_Chunk* marineWalking = nullptr; // pointer to sound effect for marine walking
+Mix_Chunk* winner = nullptr; // pointer to sound effect for winning
+Mix_Chunk* turn = nullptr; // pointer to sound effect for turning
