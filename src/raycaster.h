@@ -231,9 +231,9 @@ public:
   }
 
   Player player;
-  private:
-  int scale; 
-  SDL_Renderer* renderer;
+private:
+  int scale; // scale for rendering
+  SDL_Renderer* renderer; // sdl render
   std::vector<std::string> map; //game map
-  int tsize;
+  int tsize; // texture
 };
