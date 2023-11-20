@@ -1,6 +1,5 @@
 # deepDiveOdysseyRaycasting
-
-The code represents a program for
+The code represents a raycasting graphics application with a Finding Pirate's Treasure Under the Sea theme. It creates a 3D perspective effect by simulating rays of light and their interactions with a map.
 
 <p align="center">
   <br>
@@ -15,12 +14,21 @@ The code represents a program for
 </p>
 
 ## Files
-
+- main.cpp: The main application file handling game logic, input, and rendering.
+- raycaster.h: Header file containing the definition of the Raycaster class for handling raycasting.
+- colors.h: Header file defining the Color struct for managing colors.
+- constants.h: Header file with constant values used in the application.
+- levels.h: Header file defining the Level struct and a vector of levels.
+- resourceManager.h: Header file for the ResourceManager class responsible for loading and managing resources.
+  
 ## Features
-
 The main features of the graphics application include:
 
-- 
+- Raycasting to create a 3D perspective effect.
+- Loading and rendering levels from text files.
+- Collision detection and handling.
+- Menu system for level selection.
+- Sound effects for player movement (bubbles) and victory (super mario bros win).
 
 ## How To Use
 
