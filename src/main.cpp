@@ -19,29 +19,29 @@ Last modification: 17/11/2023
 #include <SDL_render.h>
 #include <SDL_video.h>
 
+// function to display the main menu and handle level selection
 int showMenu(SDL_Renderer* renderer) {
+    // initialization
     int selectedOption = 0;
     int quitOption = levels.size();
     bool quit = false;
-
     TTF_Font* font = TTF_OpenFont("src/assets/Alphakind.ttf", 24);
-
     int windowWidth, windowHeight;
     SDL_GetWindowSize(window, &windowWidth, &windowHeight);
 
+    // welcome message
     SDL_Color welcomeColor = { 40, 131, 154 };
     SDL_Surface* welcomeSurface = TTF_RenderText_Solid(font, "Choose a level and have fun (:", welcomeColor);
     SDL_Texture* welcomeTexture = SDL_CreateTextureFromSurface(renderer, welcomeSurface);
     SDL_Surface* backgroundSurface = IMG_Load("src/assets/screens/ddo.png");
     SDL_Texture* backgroundTexture = SDL_CreateTextureFromSurface(renderer, backgroundSurface);
     SDL_FreeSurface(backgroundSurface);
-
     int welcomeX = (windowWidth - welcomeSurface->w) / 2;
     int welcomeY = (windowHeight - welcomeSurface->h) / 2 - 50;
 
+    // menu loop
     while (!quit) {
         SDL_RenderClear(renderer);
-
         SDL_Rect welcomeRect = { welcomeX, welcomeY, welcomeSurface->w, welcomeSurface->h };
         SDL_RenderCopy(renderer, backgroundTexture, nullptr, nullptr);
         SDL_RenderCopy(renderer, welcomeTexture, nullptr, &welcomeRect);
@@ -51,6 +51,7 @@ int showMenu(SDL_Renderer* renderer) {
         for (int i = 0; i < levels.size(); ++i) {
             SDL_Color textColor = { 93, 137, 148 };
 
+            // render menu options
             if (i == selectedOption) {
                 textColor.r = 12;
                 textColor.g = 71;
@@ -72,6 +73,7 @@ int showMenu(SDL_Renderer* renderer) {
             }
         }
 
+        // render exit option
         SDL_Color exitColor = { 93, 137, 148 };
         if (selectedOption == quitOption) {
             exitColor.r = 12;
@@ -99,7 +101,7 @@ int showMenu(SDL_Renderer* renderer) {
                     if (selectedOption == quitOption) {
                         quit = true;
                     } else {
-                        quit = true;
+                        quit = true; // both options currently lead to exit
                     }
                 }
             }
@@ -108,6 +110,7 @@ int showMenu(SDL_Renderer* renderer) {
         SDL_RenderPresent(renderer);
     }
 
+    // cleanup and return selected option
     SDL_DestroyTexture(backgroundTexture);
     TTF_CloseFont(font);
     SDL_FreeSurface(welcomeSurface);
@@ -115,6 +118,7 @@ int showMenu(SDL_Renderer* renderer) {
     return (selectedOption == quitOption) ? -1 : selectedOption;
 }
 
+// function to render the floor
 void floor() {
   SDL_SetRenderDrawColor(renderer, 55, 80, 117, 255);
   SDL_Rect rect = {
@@ -124,6 +128,7 @@ void floor() {
   SDL_RenderFillRect(renderer, &rect);
 }
 
+// function to render a victory message
 void renderWinnerMessage() {
   SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
   SDL_RenderClear(renderer);
@@ -138,12 +143,15 @@ void renderWinnerMessage() {
   SDL_Quit();
 }
 
+// function to clear the renderer
 void clear() {
   SDL_SetRenderDrawColor(renderer, 59, 107, 139, 255);
   SDL_RenderClear(renderer);
 }
 
+// main function for the DDO game
 int main() {
+  // initialization
   Uint32 lastTime = SDL_GetTicks();
   bool mouseCaptured = false;
   bool bubblesSound = false;
@@ -152,11 +160,11 @@ int main() {
   int speed = 10;
   int previousMouseX = 0;
   SDL_Rect playerRect;
-  
   SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
   Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
   ResourceManager::init();
-
+  
+  // creating window and renderer
   window = SDL_CreateWindow("DDO by bl33h", 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
   renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
   ResourceManager::loadImage("-", "src/assets/objects/uw.png");
@@ -172,7 +180,8 @@ int main() {
         return 1;
     }
 
-  int selectedLevel = showMenu(renderer);
+    // handling level selection
+    int selectedLevel = showMenu(renderer);
     if (selectedLevel == -1) {
         SDL_DestroyWindow(window);
         SDL_Quit();
@@ -188,6 +197,7 @@ int main() {
         return 1;
     }
 
+    // loading and playing music
     Mix_Music* backgroundMusic = Mix_LoadMUS("src/assets/sounds/mikaUnderwater.mp3");
     marineWalking = Mix_LoadWAV("src/assets/sounds/bubbles.mp3");
     winner = Mix_LoadWAV("src/assets/sounds/marioBrosVida.mp3");
@@ -198,6 +208,7 @@ int main() {
 
   std::vector<SDL_Texture*> actionFrames;
 
+    // loading frames for character animation
     for (int i = 1; i <= 4; ++i) {
         std::string frameFileName = "src/assets/objects/character" + std::to_string(i) + ".png";
         SDL_Surface* actionFrameI = IMG_Load(frameFileName.c_str());
@@ -213,7 +224,8 @@ int main() {
         running = false;
         break;
       }
-
+      
+      // handling mouse input for rotation
       if (event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT) {
           mouseCaptured = true;
           previousMouseX = event.button.x;
@@ -260,6 +272,8 @@ int main() {
             int nextY = r.player.y - speed * sin(r.player.a);
             if (r.checkWinner()) {
                 Mix_PlayChannel(-1, winner, 0);
+
+                // configuring for victory
                 winnerConfig = true;
             }
             if (!r.checkCollision(nextX, nextY)) {
@@ -292,8 +306,11 @@ int main() {
     if (winnerConfig) {
         renderWinnerMessage();
 
+    // rendering the game scene
     } else {
         r.render();
+
+        // animation for bubbles
         if (bubblesSound) {
             for (size_t i = 0; i < actionFrames.size(); ++i) {
                 SDL_RenderCopy(renderer, actionFrames[i], nullptr, &playerRect);
@@ -301,15 +318,20 @@ int main() {
                 SDL_Delay(100);
             }
             bubblesSound = false;
+
+        // rendering the character
         } else {
         ResourceManager::render(renderer, "p",  SCREEN_WIDTH/2.0f - size/2.0f, SCREEN_HEIGHT - size, size);
         }
     }
 
+    // window update
     SDL_RenderPresent(renderer);
       frameCount++;
       Uint32 currentTime = SDL_GetTicks();
       Uint32 elapsedTime = currentTime - lastTime;
+    
+    // calculating FPS
     if (elapsedTime >= 1000) {
         int fps = frameCount * 1000 / elapsedTime;
         std::string title = "DDO by bl33h - FPS: " + std::to_string(fps);
@@ -319,6 +341,8 @@ int main() {
         lastTime = currentTime;
     }
   }
+
+    // cleanup
     if (marineWalking) {
         Mix_FreeChunk(marineWalking);
         marineWalking = nullptr;
