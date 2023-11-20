@@ -4,7 +4,10 @@ The code represents a program for
 
 <p align="center">
   <br>
-  <img src="" alt="pic" width="500">
+  <video width="500" height="280" controls>
+    <source src="src/vid/ddo.mp4" type="video/mp4">
+    Tu navegador no soporta el tag de video.
+  </video>
   <br>
 </p>
 
