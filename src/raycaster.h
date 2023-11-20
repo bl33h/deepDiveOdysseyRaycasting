@@ -25,13 +25,13 @@ const Color W = {255, 255, 255}; // clear color
 const int WIDTH = 16; // width of the game map
 const int HEIGHT = 11; // height of the game map
 const int BLOCK = 50; // size of a map block
-const int SCREEN_WIDTH = WIDTH * BLOCK;
-const int SCREEN_HEIGHT = HEIGHT * BLOCK;
-int minimapWidth = SCREEN_WIDTH / 4; 
-int minimapHeight = SCREEN_HEIGHT / 4;
-int minimapX = SCREEN_WIDTH - minimapWidth;
-int minimapY = 0;
-float minimapScale = 0.25f;
+const int SCREEN_WIDTH = WIDTH * BLOCK; // screen width
+const int SCREEN_HEIGHT = HEIGHT * BLOCK; // Screen height
+int minimapWidth = SCREEN_WIDTH / 4; // width of the minimap
+int minimapHeight = SCREEN_HEIGHT / 4; // height of the minimap
+int minimapX = SCREEN_WIDTH - minimapWidth; // x-coordinate of the minimap
+int minimapY = 0; // y-coordinate of the minimap
+float minimapScale = 0.25f; // scale factor for the minimap
 
 // structure representing a 2D point
 struct Point {
