@@ -4,10 +4,7 @@ The code represents a program for
 
 <p align="center">
   <br>
-  <video width="500" height="280" controls>
-    <source src="src/vid/ddo.mp4" type="video/mp4">
-    Tu navegador no soporta el tag de video.
-  </video>
+  <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpsd2RzZWZjanN6eGQ3dG1randuZWk0dW5rb3oyYmRydXF6djA2dSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/cKLWT870ZJ9XwipnWw/giphy.gif" alt="pic" width="500">
   <br>
 </p>
 
